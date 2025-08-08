@@ -1,6 +1,14 @@
-from http.server import SimpleHTTPRequestHandler, HTTPServer
 import os
-PORT = int(os.environ.get("PORT", "8080"))
+from http.server import HTTPServer
+
+PORT = int(os.environ.get("PORT", 8080))
+
+# your handler code above...
+server_address = ("0.0.0.0", PORT)
+httpd = HTTPServer(server_address, MyHandler)
+print(f"Serving on port {PORT}...")
+httpd.serve_forever()
+
 
 quotes_by_mood = {
     "😊": [
