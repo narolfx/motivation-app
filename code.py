@@ -781,9 +781,10 @@ class MyHandler(SimpleHTTPRequestHandler):
 </html>
 """
 
-def run():
-    print(f"Serving on port {PORT}...")
-    HTTPServer(("", PORT), MyHandler).serve_forever()
-
+# Run server for Render or local
 if __name__ == "__main__":
-    run()
+    PORT = int(os.environ.get("PORT", "8080"))
+    server_address = ("0.0.0.0", PORT)
+    httpd = HTTPServer(server_address, MyHandler)
+    print(f"Serving on port {PORT}...")
+    httpd.serve_forever()
